@@ -1,0 +1,169 @@
+# ============================================================
+# 毕业设计仓库 .gitignore
+# 方向：安全数据处理与分析 / 异常识别 / 攻防博弈（Web + Python 数据智能）
+# ============================================================
+
+# ---------- Trae / 编辑器生成的临时产物 ----------
+.trae/
+.trae-html-share-packages/
+.screenshots/
+*.trae-share.zip
+
+# ---------- 操作系统 ----------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ---------- IDE / 编辑器 ----------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 虚拟环境
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# 测试与类型检查缓存
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# ---------- Node / 前端 ----------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.vite/
+dist/
+dist-ssr/
+*.local
+coverage/
+.eslintcache
+
+# ---------- 数据与数据集 ----------
+# 安全方向的原始数据往往几十 GB，只提交小规模样例，大文件一律不入库
+data/
+datasets/
+raw_data/
+processed_data/
+raw/
+cache/
+*.pcap
+*.pcapng
+*.cap
+*.snoop
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.rar
+
+# ---------- 模型权重与中间产物 ----------
+models/
+checkpoints/
+runs/
+wandb/
+mlruns/
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.hdf5
+*.onnx
+*.pb
+*.pkl
+*.pickle
+*.joblib
+*.model
+*.sav
+*.npy
+*.npz
+*.parquet
+*.feather
+
+# ---------- 日志 ----------
+logs/
+log/
+*.log
+*.log.*
+
+# ---------- 配置与密钥（严禁入库）----------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.yaml
+secrets.yml
+credentials.json
+config.local.*
+
+# ---------- Docker / 本地运行数据 ----------
+.docker/
+docker-compose.override.yml
+*.pid
+*.seed
+*.sock
+
+# ---------- 数据库本地文件 ----------
+*.sqlite
+*.sqlite3
+*.db
+mysql-data/
+redis-data/
+
+# ---------- 论文与答辩产物（按需保留，默认不入库）----------
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*~$*.docx
+*~$*.pptx
+*~$*.xlsx
+
+# ---------- 允许提交的例外 ----------
+!data/samples/
+!data/samples/**
+!datasets/README.md
+!.env.example

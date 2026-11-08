@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安全数据智能 · 毕业设计学习作战地图</title>
+<meta name="description" content="面向安全数据处理与分析、异常识别与攻防博弈方向毕业设计的系统化学习清单：Web开发基础、数据智能分析算法、安全数据专项、攻防对抗与毕设建议。">
+<style>
+:root{
+  --bg:#070c13;
+  --bg2:#0a1220;
+  --surface:#0e1726;
+  --surface2:#122033;
+  --line:rgba(148,163,184,.14);
+  --line-soft:rgba(148,163,184,.08);
+  --text:#e8eef7;
+  --muted:#8ea0b8;
+  --faint:#5b6b82;
+  --cyan:#22d3ee;
+  --green:#34d399;
+  --violet:#a78bfa;
+  --rose:#fb7185;
+  --amber:#fbbf24;
+  --blue:#60a5fa;
+  --orange:#fb923c;
+  --red:#f87171;
+  --radius:14px;
+  --mono:"JetBrains Mono","Cascadia Code",Consolas,"Courier New",monospace;
+  --sans:"PingFang SC","Microsoft YaHei","Segoe UI","Noto Sans SC",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:15.5px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:rgba(34,211,238,.28);color:#fff}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---------- Top nav ---------- */
+.topnav{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  background:rgba(7,12,19,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.topnav-inner{
+  max-width:1180px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;gap:26px;height:60px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.02em;white-space:nowrap}
+.brand svg{flex:none}
+.brand .tld{color:var(--cyan);font-family:var(--mono);font-size:12px;font-weight:500;border:1px solid rgba(34,211,238,.35);border-radius:5px;padding:1px 6px}
+.navlinks{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{
+  color:var(--muted);font-size:13px;white-space:nowrap;
+  padding:5px 11px;border-radius:999px;transition:color .2s,background .2s;
+}
+.navlinks a:hover{color:var(--text);text-decoration:none}
+.navlinks a.active{color:var(--cyan);background:rgba(34,211,238,.1)}
+.nav-progress{width:110px;flex:none;display:flex;align-items:center;gap:8px}
+.nav-progress .bar{flex:1;height:4px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.nav-progress .bar i{display:block;height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .5s ease}
+.nav-progress .pct{font-family:var(--mono);font-size:11.5px;color:var(--muted);min-width:34px;text-align:right}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  padding:150px 28px 90px;
+  border-bottom:1px solid var(--line-soft);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(720px 420px at 78% 8%,rgba(34,211,238,.16),transparent 62%),
+    radial-gradient(560px 380px at 12% 88%,rgba(52,211,153,.1),transparent 65%),
+    radial-gradient(420px 300px at 55% 55%,rgba(167,139,250,.07),transparent 70%);
+}
+.hero-grid{
+  position:absolute;inset:0;opacity:.5;
+  background-image:
+    linear-gradient(rgba(148,163,184,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(148,163,184,.06) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(ellipse 90% 80% at 60% 30%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 80% at 60% 30%,#000 20%,transparent 78%);
+}
+.hero-fade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(7,12,19,.35) 0%,rgba(7,12,19,.25) 45%,var(--bg) 100%);
+}
+.hero-inner{position:relative;max-width:1180px;margin:0 auto}
+.hero-kicker{font-family:var(--mono);font-size:12.5px;color:var(--cyan);letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
+.hero h1{
+  font-size:clamp(30px,4.6vw,52px);
+  line-height:1.18;font-weight:800;letter-spacing:-.01em;
+  max-width:760px;margin-bottom:20px;
+}
+.hero h1 em{font-style:normal;background:linear-gradient(92deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{max-width:640px;color:#c3d0e2;font-size:16.5px;margin-bottom:34px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+.stat-card{
+  background:rgba(14,23,38,.72);border:1px solid var(--line);
+  border-radius:var(--radius);padding:14px 20px;min-width:130px;
+  backdrop-filter:blur(8px);
+}
+.stat-card .num{font-family:var(--mono);font-size:24px;font-weight:700;color:#fff;line-height:1.2}
+.stat-card .num small{font-size:13px;color:var(--muted);font-weight:400}
+.stat-card .lbl{font-size:12px;color:var(--muted);margin-top:2px}
+.donut-card{display:flex;align-items:center;gap:14px;padding:10px 20px}
+.donut{
+  --p:0;
+  width:58px;height:58px;border-radius:50%;flex:none;
+  background:conic-gradient(var(--green) calc(var(--p)*1%),var(--surface2) 0);
+  display:grid;place-items:center;
+  transition:--p .5s;
+}
+.donut::after{content:"";position:absolute;width:44px;height:44px;border-radius:50%;background:#0d1626}
+.donut-wrap{position:relative;display:grid;place-items:center;width:58px;height:58px}
+.donut-wrap span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;font-family:var(--mono);font-size:12px;color:var(--green);font-weight:700}
+.donut-info .lbl{margin-top:0}
+.donut-info .hint{font-size:11px;color:var(--faint)}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+section.block{padding:72px 0 8px}
+.sec-head{margin-bottom:10px}
+.sec-head .tag{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.14em;margin-bottom:10px}
+.sec-head h2{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-.01em}
+.sec-head p{color:var(--muted);max-width:720px;margin-top:10px;font-size:15px}
+
+/* ---------- Legend & filter ---------- */
+.toolbelt{
+  position:sticky;top:60px;z-index:90;
+  background:rgba(7,12,19,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-soft);
+  padding:12px 0;margin-top:8px;
+}
+.toolbelt .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.toolbelt .label{font-size:12.5px;color:var(--faint);font-family:var(--mono);margin-right:2px}
+.chip{
+  border:1px solid var(--line);background:var(--surface);
+  color:var(--muted);font-size:12.5px;padding:5px 13px;border-radius:999px;
+  cursor:pointer;transition:all .18s;font-family:var(--sans);
+}
+.chip:hover{color:var(--text);border-color:rgba(148,163,184,.35)}
+.chip.active{color:#05121a;background:var(--cyan);border-color:var(--cyan);font-weight:600}
+.toolbelt .spacer{flex:1}
+.legend{display:flex;gap:12px;flex-wrap:wrap}
+.legend .li{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--faint)}
+.legend .dot{width:8px;height:8px;border-radius:3px}
+
+/* ---------- Phase ---------- */
+.phase{
+  position:relative;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,var(--surface),#0c1421);
+  border-radius:18px;
+  padding:30px 30px 26px;
+  margin:34px 0 0;
+  overflow:hidden;
+}
+.phase::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--pc,var(--cyan)),transparent 85%);
+}
+.phase-head{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:6px}
+.phase-num{
+  font-family:var(--mono);font-size:13px;font-weight:700;color:var(--pc,var(--cyan));
+  border:1px solid color-mix(in srgb,var(--pc,var(--cyan)) 40%,transparent);
+  background:color-mix(in srgb,var(--pc,var(--cyan)) 9%,transparent);
+  border-radius:9px;padding:7px 12px;line-height:1.2;flex:none;margin-top:3px;
+}
+.phase-title{flex:1;min-width:240px}
+.phase-title h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.phase-title .goal{color:var(--muted);font-size:13.5px;margin-top:5px;max-width:640px}
+.phase-meta{flex:none;text-align:right;min-width:170px}
+.phase-meta .dur{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.phase-meta .pbar{height:5px;border-radius:99px;background:var(--surface2);overflow:hidden;margin-top:9px}
+.phase-meta .pbar i{display:block;height:100%;width:0%;background:var(--pc,var(--cyan));border-radius:99px;transition:width .4s ease}
+.phase-meta .ptxt{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:6px}
+
+.mod{
+  border-top:1px solid var(--line-soft);
+  padding:20px 0 4px;margin-top:16px;
+}
+.mod h4{
+  font-size:15px;font-weight:700;display:flex;align-items:center;gap:9px;margin-bottom:4px;
+}
+.mod h4 .mno{font-family:var(--mono);font-size:11px;color:var(--pc,var(--cyan));font-weight:600}
+.mod > .why{font-size:13px;color:var(--faint);margin-bottom:12px}
+
+.item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:11px 12px;border-radius:11px;
+  transition:background .18s;
+}
+.item:hover{background:rgba(148,163,184,.05)}
+.item .ck{flex:none;margin-top:3px;position:relative;width:19px;height:19px}
+.item .ck input{appearance:none;-webkit-appearance:none;width:19px;height:19px;border:1.5px solid #3a4a61;border-radius:6px;cursor:pointer;display:block;transition:all .18s;background:transparent}
+.item .ck input:hover{border-color:var(--cyan)}
+.item .ck input:checked{background:var(--green);border-color:var(--green)}
+.item .ck input:checked::after{
+  content:"";position:absolute;left:6px;top:2.5px;width:4px;height:9px;
+  border:solid #04150e;border-width:0 2.2px 2.2px 0;transform:rotate(42deg);
+}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:14.5px;font-weight:600;color:var(--text)}
+.item.done .item-title{color:var(--faint);text-decoration:line-through;text-decoration-color:rgba(148,163,184,.4)}
+.item-desc{font-size:13px;color:var(--muted);margin-top:2px}
+.item.done .item-desc{color:var(--faint)}
+.res{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.res a{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;color:#c3d0e2;
+  background:var(--surface2);border:1px solid var(--line);
+  border-radius:8px;padding:3.5px 10px 3.5px 5px;
+  transition:all .18s;text-decoration:none;
+}
+.res a:hover{border-color:rgba(34,211,238,.5);color:#fff;text-decoration:none;transform:translateY(-1px)}
+.res a .badge{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.04em;
+  padding:1.5px 6px;border-radius:5px;
+  background:rgba(34,211,238,.14);color:var(--cyan);
+}
+.res a[data-type="video"] .badge{background:rgba(251,113,133,.15);color:var(--rose)}
+.res a[data-type="course"] .badge{background:rgba(167,139,250,.15);color:var(--violet)}
+.res a[data-type="lab"] .badge{background:rgba(52,211,153,.15);color:var(--green)}
+.res a[data-type="tool"] .badge{background:rgba(251,191,36,.15);color:var(--amber)}
+.res a[data-type="data"] .badge{background:rgba(96,165,250,.15);color:var(--blue)}
+.res a[data-type="book"] .badge{background:rgba(251,146,60,.15);color:var(--orange)}
+.res a.dim{opacity:.18;filter:saturate(.3)}
+.res a.dim:hover{opacity:.6}
+
+/* ---------- Proposal cards ---------- */
+.prop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:30px}
+.prop{
+  border:1px solid var(--line);border-radius:16px;
+  background:linear-gradient(180deg,var(--surface),#0c1421);
+  padding:24px;display:flex;flex-direction:column;gap:14px;
+  transition:transform .22s,border-color .22s;
+}
+.prop:hover{transform:translateY(-3px);border-color:rgba(34,211,238,.35)}
+.prop-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.prop h3{font-size:16.5px;font-weight:800;line-height:1.45}
+.stars{font-family:var(--mono);font-size:12px;color:var(--amber);white-space:nowrap;letter-spacing:2px}
+.prop .field{font-size:13px;color:var(--muted)}
+.prop .field b{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.prop ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.prop ul li{font-size:13px;color:var(--muted);padding-left:15px;position:relative}
+.prop ul li::before{content:"›";position:absolute;left:0;color:var(--cyan);font-weight:700}
+.prop .inno{border-left:2px solid var(--green);padding:6px 12px;background:rgba(52,211,153,.06);border-radius:0 8px 8px 0;font-size:12.5px;color:#a7dcc4}
+.prop .risk{border-left:2px solid var(--amber);padding:6px 12px;background:rgba(251,191,36,.05);border-radius:0 8px 8px 0;font-size:12.5px;color:#d8c08a}
+.prop .pick{
+  align-self:flex-start;font-family:var(--mono);font-size:11px;font-weight:700;
+  color:var(--green);border:1px solid rgba(52,211,153,.4);background:rgba(52,211,153,.08);
+  padding:3px 10px;border-radius:999px;
+}
+
+/* ---------- Timeline ---------- */
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:30px}
+.tl-stage{
+  border:1px solid var(--line);border-radius:14px;padding:18px;
+  background:var(--surface);position:relative;
+}
+.tl-stage .wk{font-family:var(--mono);font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:.06em}
+.tl-stage h4{font-size:14.5px;font-weight:700;margin:6px 0 8px}
+.tl-stage ul{list-style:none}
+.tl-stage li{font-size:12.5px;color:var(--muted);padding-left:13px;position:relative;margin-bottom:4px}
+.tl-stage li::before{content:"·";position:absolute;left:2px;color:var(--cyan);font-weight:900}
+@media(max-width:900px){.tl{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.tl{grid-template-columns:1fr}}
+
+/* ---------- Tips ---------- */
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:30px}
+.tip{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--surface)}
+.tip h4{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tip h4 svg{flex:none}
+.tip p,.tip li{font-size:13.5px;color:var(--muted)}
+.tip ul{list-style:none;margin-top:6px}
+.tip ul li{padding-left:15px;position:relative;margin-bottom:6px}
+.tip ul li::before{content:"›";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* ---------- Footer ---------- */
+footer{
+  margin-top:90px;border-top:1px solid var(--line-soft);
+  padding:40px 28px 56px;text-align:center;color:var(--faint);font-size:12.5px;
+}
+footer .mono{font-family:var(--mono)}
+.reset-btn{
+  margin-top:12px;display:inline-block;
+  border:1px solid var(--line);background:transparent;color:var(--faint);
+  font-size:12px;padding:6px 16px;border-radius:999px;cursor:pointer;transition:all .2s;font-family:var(--sans);
+}
+.reset-btn:hover{color:var(--rose);border-color:rgba(251,113,133,.4)}
+
+@media(max-width:760px){
+  .phase{padding:22px 18px}
+  .phase-meta{text-align:left;width:100%}
+  .nav-progress{display:none}
+  .hero{padding:120px 20px 64px}
+  .wrap{padding:0 20px}
+}
+@media print{
+  .topnav,.toolbelt,.reset-btn{display:none}
+  body{background:#fff;color:#000}
+  .phase,.prop,.tip,.tl-stage{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5.5V11c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5.5L12 2z" stroke="#22d3ee" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12l2.4 2.4L15.6 9.5" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      SecData·Roadmap
+      <span class="tld">毕设学习清单</span>
+    </div>
+    <div class="navlinks" id="navlinks">
+      <a href="#overview">总览</a>
+      <a href="#p1">① 开发基础</a>
+      <a href="#p2">② Web 开发</a>
+      <a href="#p3">③ 安全基础</a>
+      <a href="#p4">④ 数据处理</a>
+      <a href="#p5">⑤ 机器学习·异常检测</a>
+      <a href="#p6">⑥ 安全数据专项</a>
+      <a href="#p7">⑦ 攻防博弈</a>
+      <a href="#p8">⑧ 工程实践</a>
+      <a href="#proposals">毕设建议</a>
+      <a href="#timeline">时间规划</a>
+    </div>
+    <div class="nav-progress">
+      <div class="bar"><i id="navBarFill"></i></div>
+      <span class="pct" id="navPct">0%</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="overview">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <div class="hero-kicker">GRADUATION DESIGN · SECURITY DATA INTELLIGENCE</div>
+    <h1>安全数据处理与智能分析<br><em>从 Web 开发到异常识别与攻防博弈</em>的学习作战地图</h1>
+    <p class="lead">八个递进阶段、四十余个可勾选任务、覆盖文档 / 视频 / 课程 / 实验 / 数据集的系统化清单。完成进度自动保存在本地，配合文末的四个毕设选题方案与十六周时间规划使用。</p>
+    <div class="hero-stats">
+      <div class="stat-card donut-card">
+        <div class="donut-wrap">
+          <div class="donut" id="donut"></div>
+          <span id="donutPct">0%</span>
+        </div>
+        <div class="donut-info">
+          <div class="num" id="doneCount">0<small> / <span id="totalCount">0</span></small></div>
+          <div class="lbl">已完成的任务项</div>
+          <div class="hint">进度保存在浏览器本地</div>
+        </div>
+      </div>
+      <div class="stat-card"><div class="num">8</div><div class="lbl">递进学习阶段</div></div>
+      <div class="stat-card"><div class="num">120+</div><div class="lbl">精选资源链接</div></div>
+      <div class="stat-card"><div class="num">4</div><div class="lbl">可落地毕设选题</div></div>
+      <div class="stat-card"><div class="num">16<small> 周</small></div><div class="lbl">建议毕设执行周期</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TOOLBELT ============ -->
+<div class="toolbelt">
+  <div class="wrap">
+    <span class="label">资源筛选</span>
+    <button class="chip active" data-filter="all">全部</button>
+    <button class="chip" data-filter="doc">文档</button>
+    <button class="chip" data-filter="video">视频</button>
+    <button class="chip" data-filter="course">课程</button>
+    <button class="chip" data-filter="lab">实验</button>
+    <button class="chip" data-filter="data">数据集</button>
+    <button class="chip" data-filter="tool">工具</button>
+    <button class="chip" data-filter="book">书籍</button>
+    <span class="spacer"></span>
+    <div class="legend">
+      <span class="li"><span class="dot" style="background:var(--cyan)"></span>文档</span>
+      <span class="li"><span class="dot" style="background:var(--rose)"></span>视频</span>
+      <span class="li"><span class="dot" style="background:var(--violet)"></span>课程</span>
+      <span class="li"><span class="dot" style="background:var(--green)"></span>实验</span>
+      <span class="li"><span class="dot" style="background:var(--blue)"></span>数据集</span>
+      <span class="li"><span class="dot" style="background:var(--amber)"></span>工具</span>
+      <span class="li"><span class="dot" style="background:var(--orange)"></span>书籍</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- ============ PHASE 1 ============ -->
+<section class="block" id="p1">
+<div class="phase" style="--pc:#22d3ee">
+  <div class="phase-head">
+    <div class="phase-num">PHASE<br>01</div>
+    <div class="phase-title">
+      <h3>开发基础：编程、网络与 Linux</h3>
+      <p class="goal">目标：建立安全数据分析必需的工程底座 —— 能熟练用 Python 处理数据、看懂 HTTP 报文、在 Linux 上部署服务。此阶段不追求深度，追求"够用且顺手"。</p>
+    </div>
+    <div class="phase-meta">
+      <div class="dur">建议周期 · 4 ~ 6 周</div>
+      <div class="pbar"><i></i></div>
+      <div class="ptxt">0 / 0</div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">1.1</span>Python 编程（主力语言）</h4>
+    <p class="why">安全数据处理、建模、写工具脚本都离不开 Python，要求达到能独立写 200 行数据处理脚本的熟练度。</p>
+
+    <div class="item" data-id="p1i1">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Python 语法与标准库：数据结构、文件 I/O、正则、json、多线程基础</div>
+        <div class="item-desc">边学边练：用 Python 写一个"统计文本中 IP 出现次数并输出 Top10"的小脚本作为结业练习。</div>
+        <div class="res">
+          <a href="https://docs.python.org/zh-cn/3/tutorial/" target="_blank" rel="noopener"><span class="badge">DOC</span>Python 官方中文教程</a>
+          <a href="https://www.liaoxuefeng.com/wiki/1016959663602400" target="_blank" rel="noopener"><span class="badge">DOC</span>廖雪峰 Python 教程</a>
+          <a href="https://www.bilibili.com/video/BV1qW4y1a7fU/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>黑马程序员 Python 入门（B 站）</a>
+          <a href="https://www.runoob.com/python3/python3-reg-expressions.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Python3 正则表达式</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p1i2">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">虚拟环境与包管理：venv / conda、pip、requirements.txt</div>
+        <div class="item-desc">毕设期间至少会维护 2~3 个项目环境（数据处理、模型训练、Web 服务），环境隔离从第一天做起。</div>
+        <div class="res">
+          <a href="https://docs.python.org/zh-cn/3/library/venv.html" target="_blank" rel="noopener"><span class="badge">DOC</span>venv 官方文档</a>
+          <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Conda 快速上手</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p1i3">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Git 版本控制：commit / branch / merge / rebase / 远程协作</div>
+        <div class="item-desc">毕设代码必须进 Git 仓库，既是备份也是答辩时"工作量与迭代过程"的证据。</div>
+        <div class="res">
+          <a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener"><span class="badge">BOOK</span>Pro Git 中文版（免费在线）</a>
+          <a href="https://skills.github.com/" target="_blank" rel="noopener"><span class="badge">COURSE</span>GitHub Skills 交互课程</a>
+          <a href="https://learngitbranching.js.org/?locale=zh_CN" target="_blank" rel="noopener"><span class="badge">LAB</span>Learn Git Branching（可视化练习）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">1.2</span>计算机网络与 HTTP</h4>
+    <p class="why">入侵检测、流量分析的原料就是网络数据。至少要能读懂一次 HTTP 请求的完整生命周期、TCP 三次握手、常见端口与协议字段。</p>
+
+    <div class="item" data-id="p1i4">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">TCP/IP 与 HTTP 协议核心：报文结构、状态码、Header、TLS 握手</div>
+        <div class="item-desc">建议配合 Wireshark 抓包对照学习，看到真实报文后概念会立刻落地。</div>
+        <div class="res">
+          <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP" target="_blank" rel="noopener"><span class="badge">DOC</span>MDN · HTTP 完全指南</a>
+          <a href="https://www.bilibili.com/video/BV1iV411t7Sj/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>湖科大教书匠《计算机网络微课堂》（B 站）</a>
+          <a href="https://www.rfc-editor.org/rfc/rfc9110.html" target="_blank" rel="noopener"><span class="badge">DOC</span>RFC 9110 · HTTP Semantics（进阶查阅）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p1i5">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">抓包实操：用 Wireshark 分析一次完整 HTTP / DNS 会话</div>
+        <div class="item-desc">能回答：三次握手在哪几帧、DNS 查询问了什么、响应 Content-Type 是什么。这是流量分析的第一次"手感"。</div>
+        <div class="res">
+          <a href="https://www.wireshark.org/docs/wsug_html_chunked/" target="_blank" rel="noopener"><span class="badge">DOC</span>Wireshark 官方用户指南</a>
+          <a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener"><span class="badge">DATA</span>Wireshark 官方示例抓包集</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">1.3</span>Linux 与命令行</h4>
+
+    <div class="item" data-id="p1i6">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Linux 基础：文件系统、权限、进程管理、ssh、常见日志位置</div>
+        <div class="item-desc">重点关注 /var/log 下的日志体系（auth.log、syslog、nginx access log）—— 它们就是日后日志异常检测的数据源。</div>
+        <div class="res">
+          <a href="http://cn.linux.vbird.org/linux_basic/linux_basic.php" target="_blank" rel="noopener"><span class="badge">BOOK</span>鸟哥的 Linux 私房菜（基础篇）</a>
+          <a href="https://linuxjourney.com/" target="_blank" rel="noopener"><span class="badge">COURSE</span>Linux Journey（免费交互课程）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p1i7">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Shell 与文本处理三剑客：grep / awk / sed</div>
+        <div class="item-desc">结业练习：用一条命令从 nginx access.log 中统计"状态码为 404 且访问 .php 路径的 IP 频次 Top10"——这就是最原始的日志异常分析。</div>
+        <div class="res">
+          <a href="https://wangchujiang.com/linux-command/" target="_blank" rel="noopener"><span class="badge">DOC</span>Linux 命令大全（中文速查）</a>
+          <a href="https://www.bilibili.com/video/BV1nL4y1e7tQ/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>Shell 文本处理实战（B 站）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PHASE 2 ============ -->
+<section class="block" id="p2">
+<div class="phase" style="--pc:#34d399">
+  <div class="phase-head">
+    <div class="phase-num">PHASE<br>02</div>
+    <div class="phase-title">
+      <h3>Web 开发：从前端到全栈</h3>
+      <p class="goal">目标：能独立做出毕设的"系统外壳" —— 一个带登录、数据展示大屏、RESTful API 的完整 Web 应用。安全方向的毕设，系统完成度是拉开档次的关键。</p>
+    </div>
+    <div class="phase-meta">
+      <div class="dur">建议周期 · 5 ~ 7 周</div>
+      <div class="pbar"><i></i></div>
+      <div class="ptxt">0 / 0</div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">2.1</span>前端三件套与框架</h4>
+
+    <div class="item" data-id="p2i1">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">HTML / CSS / JavaScript 核心：DOM、事件、fetch、ES6+、响应式布局</div>
+        <div class="item-desc">不用追求花哨，重点是 DOM 操作、异步请求和 Flex/Grid 布局 —— 大屏和列表页全靠它们。</div>
+        <div class="res">
+          <a href="https://developer.mozilla.org/zh-CN/docs/Learn" target="_blank" rel="noopener"><span class="badge">DOC</span>MDN 学习专区（最权威的路线）</a>
+          <a href="https://zh.javascript.info/" target="_blank" rel="noopener"><span class="badge">DOC</span>现代 JavaScript 教程</a>
+          <a href="https://www.freecodecamp.org/chinese/" target="_blank" rel="noopener"><span class="badge">COURSE</span>freeCodeCamp 中文（免费练习）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p2i2">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">框架二选一：Vue 3（上手快）或 React（生态大）</div>
+        <div class="item-desc">毕设推荐 Vue 3 + Vite + Element Plus，一周可出界面；若未来找前端/全栈实习则选 React。只学一个，学透组件、状态、路由即可。</div>
+        <div class="res">
+          <a href="https://cn.vuejs.org/guide/introduction.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Vue 3 官方中文文档</a>
+          <a href="https://zh-hans.react.dev/learn" target="_blank" rel="noopener"><span class="badge">DOC</span>React 官方中文文档</a>
+          <a href="https://element-plus.org/zh-CN/" target="_blank" rel="noopener"><span class="badge">DOC</span>Element Plus 组件库</a>
+          <a href="https://www.bilibili.com/video/BV1Za4y1r7KE/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>尚硅谷 Vue3 实战（B 站）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p2i3">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">数据可视化：ECharts 做出"安全态势大屏"</div>
+        <div class="item-desc">地图攻击来源、攻击类型分布饼图、流量时序曲线、TopN 榜单 —— ECharts 官方案例几乎能覆盖大屏所有图型。</div>
+        <div class="res">
+          <a href="https://echarts.apache.org/zh/index.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Apache ECharts 官网与示例</a>
+          <a href="https://www.makeapie.cn/echarts" target="_blank" rel="noopener"><span class="badge">LAB</span>ECharts 社区作品集（找大屏灵感）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">2.2</span>后端与数据库</h4>
+
+    <div class="item" data-id="p2i4">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Python Web 框架：FastAPI（推荐）或 Flask</div>
+        <div class="item-desc">FastAPI 自带接口文档、异步支持好，还能直接挂载训练好的模型做在线推理 —— 安全分析类毕设的天然选择。</div>
+        <div class="res">
+          <a href="https://fastapi.tiangolo.com/zh/" target="_blank" rel="noopener"><span class="badge">DOC</span>FastAPI 官方中文文档</a>
+          <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener"><span class="badge">DOC</span>Flask 官方文档</a>
+          <a href="https://www.bilibili.com/video/BV1Ya411D7mG/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>FastAPI 快速上手（B 站）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p2i5">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">数据库：MySQL（关系型）+ Redis（缓存/队列）+ 了解 MongoDB</div>
+        <div class="item-desc">掌握建表、索引、联表查询和聚合；理解为什么告警事件适合放 MongoDB、实时计数适合放 Redis。</div>
+        <div class="res">
+          <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener"><span class="badge">DOC</span>MySQL 官方文档</a>
+          <a href="https://www.bilibili.com/video/BV1iq4y1u7vj/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>尚硅谷 MySQL 基础（B 站）</a>
+          <a href="https://redis.io/learn/" target="_blank" rel="noopener"><span class="badge">COURSE</span>Redis 官方学习路径</a>
+          <a href="https://learn.mongodb.com/" target="_blank" rel="noopener"><span class="badge">COURSE</span>MongoDB University（免费）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p2i6">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">综合练习：做一个最小"告警管理系统"</div>
+        <div class="item-desc">FastAPI + MySQL + Vue3 + ECharts：告警列表（分页/筛选/详情）+ 一个时序统计图 + 简单登录。这就是毕设系统的最小骨架，做完它阶段二毕业。</div>
+        <div class="res">
+          <a href="https://fastapi.tiangolo.com/zh/tutorial/security/" target="_blank" rel="noopener"><span class="badge">DOC</span>FastAPI 安全认证章节（JWT）</a>
+          <a href="https://cli.vuejs.org/zh/guide/" target="_blank" rel="noopener"><span class="badge">DOC</span>Vite / Vue 工程化指引</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PHASE 3 ============ -->
+<section class="block" id="p3">
+<div class="phase" style="--pc:#f87171">
+  <div class="phase-head">
+    <div class="phase-num">PHASE<br>03</div>
+    <div class="phase-title">
+      <h3>安全基础：Web 安全与攻防入门</h3>
+      <p class="goal">目标：理解"攻击长什么样"，才能谈"检测攻击"。掌握 OWASP Top 10 漏洞原理，在靶场里亲手打一遍，再看日志里留下的痕迹 —— 这是安全数据分析的直觉来源。</p>
+    </div>
+    <div class="phase-meta">
+      <div class="dur">建议周期 · 5 ~ 8 周（可与阶段四并行）</div>
+      <div class="pbar"><i></i></div>
+      <div class="ptxt">0 / 0</div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">3.1</span>Web 漏洞原理</h4>
+
+    <div class="item" data-id="p3i1">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">OWASP Top 10：注入、XSS、SSRF、文件上传、反序列化、访问控制失效…</div>
+        <div class="item-desc">每个漏洞要求能讲清：成因 → 攻击 payload → 日志/流量特征 → 检测思路。最后一条正是异常检测的特征工程素材。</div>
+        <div class="res">
+          <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener"><span class="badge">DOC</span>OWASP Top 10 官方</a>
+          <a href="https://owasp.org/www-project-top-10-ci-id/" target="_blank" rel="noopener"><span class="badge">DOC</span>OWASP 中文项目</a>
+          <a href="https://book.douban.com/subject/10546925/" target="_blank" rel="noopener"><span class="badge">BOOK</span>《白帽子讲 Web 安全》道哥</a>
+          <a href="https://book.douban.com/subject/26748870/" target="_blank" rel="noopener"><span class="badge">BOOK</span>《Web 安全深度剖析》</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p3i2">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Burp Suite 抓包改包：Repeater / Intruder / 插件生态</div>
+        <div class="item-desc">安全人员的"主力 IDE"。重点理解每一个攻击请求在 HTTP 层面的形态 —— 之后做 WAF/IDS 特征时你就在和这些形态打交道。</div>
+        <div class="res">
+          <a href="https://portswigger.net/burp/documentation" target="_blank" rel="noopener"><span class="badge">DOC</span>Burp Suite 官方文档</a>
+          <a href="https://www.bilibili.com/video/BV1h64y1d7Sg/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>Burp Suite 使用教程（B 站）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">3.2</span>靶场实战</h4>
+
+    <div class="item" data-id="p3i3">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">PortSwigger Web Security Academy：完成 SQL 注入 / XSS / SSRF 三条主线实验</div>
+        <div class="item-desc">全免费、带讲解和配套靶场，质量远高于零散教程。完成约 30 个 Lab 即可形成系统的漏洞直觉。</div>
+        <div class="res">
+          <a href="https://portswigger.net/web-security" target="_blank" rel="noopener"><span class="badge">LAB</span>Web Security Academy（强烈推荐）</a>
+          <a href="https://github.com/digininja/DVWA" target="_blank" rel="noopener"><span class="badge">LAB</span>DVWA 本地靶场（PHP）</a>
+          <a href="https://github.com/WebGoat/WebGoat" target="_blank" rel="noopener"><span class="badge">LAB</span>WebGoat（Java 教学靶场）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p3i4">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">CTF 入门：Web / Misc 方向，攻防世界新手区 + picoCTF</div>
+        <div class="item-desc">不必沉迷比赛，但 CTF 能极快建立"攻击者思维"。每周固定 2~3 题，坚持一个学期效果显著。</div>
+        <div class="res">
+          <a href="https://adworld.xctf.org.cn/" target="_blank" rel="noopener"><span class="badge">LAB</span>攻防世界（国内，中文题解多）</a>
+          <a href="https://picoctf.org/" target="_blank" rel="noopener"><span class="badge">LAB</span>picoCTF（新手友好）</a>
+          <a href="https://ctftime.org/" target="_blank" rel="noopener"><span class="badge">TOOL</span>CTFtime 赛事日历</a>
+          <a href="https://www.hackthebox.com/" target="_blank" rel="noopener"><span class="badge">LAB</span>HackTheBox（进阶）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p3i5">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">社区与情报：FreeBuf、先知社区、奇安信攻防社区 —— 每周读 2 篇分析文</div>
+        <div class="item-desc">重点关注"攻击溯源""应急响应""流量分析"类文章，积累检测规则的语感，也顺手收集论文 related work 的国内语境。</div>
+        <div class="res">
+          <a href="https://www.freebuf.com/" target="_blank" rel="noopener"><span class="badge">DOC</span>FreeBuf 安全资讯</a>
+          <a href="https://xz.aliyun.com/" target="_blank" rel="noopener"><span class="badge">DOC</span>先知社区（技术长文）</a>
+          <a href="https://github.com/sbilly/awesome-security" target="_blank" rel="noopener"><span class="badge">TOOL</span>Awesome Security 资源总索引</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PHASE 4 ============ -->
+<section class="block" id="p4">
+<div class="phase" style="--pc:#60a5fa">
+  <div class="phase-head">
+    <div class="phase-num">PHASE<br>04</div>
+    <div class="phase-title">
+      <h3>数据处理：Python 数据分析栈</h3>
+      <p class="goal">目标：把任意 CSV / 日志 / pcap 变成干净的特征表。数据清洗和特征工程往往占安全数据项目 70% 的时间，这一阶段直接决定毕设下限。</p>
+    </div>
+    <div class="phase-meta">
+      <div class="dur">建议周期 · 3 ~ 4 周</div>
+      <div class="pbar"><i></i></div>
+      <div class="ptxt">0 / 0</div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">4.1</span>核心三件套</h4>
+
+    <div class="item" data-id="p4i1">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">NumPy：向量化思维、数组运算、布尔索引</div>
+        <div class="item-desc">不用全学，掌握 ndarray、切片、广播、常用统计函数即可，其余随用随查。</div>
+        <div class="res">
+          <a href="https://numpy.org/doc/stable/user/absolute_beginners.html" target="_blank" rel="noopener"><span class="badge">DOC</span>NumPy 官方入门</a>
+          <a href="https://www.bilibili.com/video/BV1hx411d7jb/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>莫烦 Python · NumPy &amp; Pandas（B 站）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p4i2">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Pandas：DataFrame 增删改查、groupby、merge、时间序列、缺失值处理</div>
+        <div class="item-desc">重点练 groupby 聚合和时间窗口统计 —— 把"5 分钟内同 IP 登录失败次数"这类安全特征翻译成 Pandas 代码是基本功。</div>
+        <div class="res">
+          <a href="https://pandas.pydata.org/docs/user_guide/10min.html" target="_blank" rel="noopener"><span class="badge">DOC</span>10 Minutes to pandas</a>
+          <a href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf" target="_blank" rel="noopener"><span class="badge">DOC</span>Pandas 官方速查表</a>
+          <a href="https://www.kaggle.com/learn/pandas" target="_blank" rel="noopener"><span class="badge">COURSE</span>Kaggle Learn · Pandas（免费带练习）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p4i3">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">可视化：Matplotlib / Seaborn 画分布、箱线图、热力图、混淆矩阵</div>
+        <div class="item-desc">论文里的实验图（特征分布对比、ROC 曲线、混淆矩阵热力图）全靠它们，早点建立自己的出图模板。</div>
+        <div class="res">
+          <a href="https://matplotlib.org/stable/tutorials/index.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Matplotlib 官方教程</a>
+          <a href="https://seaborn.pydata.org/tutorial.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Seaborn 官方教程</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">4.2</span>安全数据的特征工程</h4>
+
+    <div class="item" data-id="p4i4">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">日志解析：用正则 / 解析库把非结构化日志变成结构化表格</div>
+        <div class="item-desc">练习素材：Linux auth.log、nginx access log。掌握"时间戳、IP、账号、事件类型"四要素抽取。</div>
+        <div class="res">
+          <a href="https://github.com/logpai/logparser" target="_blank" rel="noopener"><span class="badge">TOOL</span>LogPAI LogParser（日志模板解析工具集）</a>
+          <a href="https://github.com/logpai/loghub" target="_blank" rel="noopener"><span class="badge">DATA</span>Loghub · 公开日志数据集（HDFS/BGL 等）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p4i5">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">流量特征：pcap → 流统计特征（Scapy / Zeek / CICFlowMeter）</div>
+        <div class="item-desc">理解 CIC-IDS2017 那 80 维特征是怎么从 pcap 里算出来的（流时长、包长统计、标志位计数…），复现一遍胜过读十篇论文。</div>
+        <div class="res">
+          <a href="https://scapy.readthedocs.io/en/latest/usage.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Scapy 官方文档</a>
+          <a href="https://docs.zeek.org/en/current/" target="_blank" rel="noopener"><span class="badge">DOC</span>Zeek（网络安全监视器）文档</a>
+          <a href="https://github.com/ahlashkari/CICFlowMeter" target="_blank" rel="noopener"><span class="badge">TOOL</span>CICFlowMeter（CIC-IDS 特征提取器）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p4i6">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Jupyter / Notebook 工作流与可复现实验习惯</div>
+        <div class="item-desc">数据探索用 Notebook，正式代码抽成 .py 模块；随机种子、库版本、数据快照三件套固定住 —— 答辩时被问"结果能复现吗"就不慌。</div>
+        <div class="res">
+          <a href="https://jupyter.org/try" target="_blank" rel="noopener"><span class="badge">LAB</span>Jupyter 在线试用</a>
+          <a href="https://github.com/drivendata/cookiecutter-data-science" target="_blank" rel="noopener"><span class="badge">TOOL</span>Cookiecutter Data Science（项目结构模板）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PHASE 5 ============ -->
+<section class="block" id="p5">
+<div class="phase" style="--pc:#a78bfa">
+  <div class="phase-head">
+    <div class="phase-num">PHASE<br>05</div>
+    <div class="phase-title">
+      <h3>机器学习与异常检测（核心阶段）</h3>
+      <p class="goal">目标：建立"基线 → 对比 → 改进"的实验方法论，掌握异常检测主流算法族，并能在公开安全数据集上完整跑通一次评估。这是毕设论文的核心章节来源。</p>
+    </div>
+    <div class="phase-meta">
+      <div class="dur">建议周期 · 6 ~ 8 周</div>
+      <div class="pbar"><i></i></div>
+      <div class="ptxt">0 / 0</div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">5.1</span>机器学习通识</h4>
+
+    <div class="item" data-id="p5i1">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">机器学习基础：监督/无监督、过拟合、交叉验证、评估指标体系</div>
+        <div class="item-desc">安全场景极度类别不平衡，必须吃透 Precision / Recall / F1 / ROC-AUC / PR-AUC 的区别 —— 只报 Accuracy 的毕设会被评委当场拆穿。</div>
+        <div class="res">
+          <a href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank" rel="noopener"><span class="badge">COURSE</span>吴恩达 Machine Learning Specialization</a>
+          <a href="https://www.bilibili.com/video/BV1Wv411h7kN/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>李宏毅机器学习 2021（B 站官方搬运）</a>
+          <a href="https://developers.google.com/machine-learning/crash-course?hl=zh-cn" target="_blank" rel="noopener"><span class="badge">COURSE</span>Google 机器学习速成（中文）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p5i2">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">scikit-learn 实战：预处理 Pipeline、网格搜索、模型持久化</div>
+        <div class="item-desc">重点学 Pipeline 的写法 —— 它能让"预处理 + 模型"整体进评估和部署，是工程上最被低估的好习惯。</div>
+        <div class="res">
+          <a href="https://scikit-learn.org/stable/getting_started.html" target="_blank" rel="noopener"><span class="badge">DOC</span>scikit-learn 官方快速入门</a>
+          <a href="https://scikit-learn.org/stable/modules/model_evaluation.html" target="_blank" rel="noopener"><span class="badge">DOC</span>模型评估指标官方章节</a>
+          <a href="https://www.kaggle.com/learn/intro-to-machine-learning" target="_blank" rel="noopener"><span class="badge">COURSE</span>Kaggle Learn · Intro to ML</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p5i3">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">深度学习入门：PyTorch 写一个 MLP / LSTM</div>
+        <div class="item-desc">安全方向不需要很深的网络理论，但要会搭：数据加载 Dataset/DataLoader → 模型 → 训练循环 → 评估，四步闭环。</div>
+        <div class="res">
+          <a href="https://pytorch.org/tutorials/beginner/basics/intro.html" target="_blank" rel="noopener"><span class="badge">DOC</span>PyTorch 官方入门教程</a>
+          <a href="https://zh.d2l.ai/" target="_blank" rel="noopener"><span class="badge">BOOK</span>《动手学深度学习》李沐（免费中文书 + 代码）</a>
+          <a href="https://space.bilibili.com/1567748478" target="_blank" rel="noopener"><span class="badge">VIDEO</span>李沐 B 站（跟书配套视频）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">5.2</span>异常检测算法族（毕设主力）</h4>
+
+    <div class="item" data-id="p5i4">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">统计与距离类：3σ / 箱线图规则、KNN 距离、LOF 局部离群因子</div>
+        <div class="item-desc">先理解"异常 = 偏离正常分布"的统一视角；这些方法是必做的 baseline。</div>
+        <div class="res">
+          <a href="https://scikit-learn.org/stable/modules/outlier_detection.html" target="_blank" rel="noopener"><span class="badge">DOC</span>sklearn 异常检测官方总览（一图看懂各算法适用面）</a>
+          <a href="https://pyod.readthedocs.io/en/latest/" target="_blank" rel="noopener"><span class="badge">TOOL</span>PyOD · Python 异常检测全家桶库</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p5i5">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">树模型类：Isolation Forest、One-Class SVM、XGBoost（有标签时）</div>
+        <div class="item-desc">Isolation Forest 是安全日志检测的"国民算法"，务必搞懂原理并亲手调参（n_estimators、contamination）。</div>
+        <div class="res">
+          <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html" target="_blank" rel="noopener"><span class="badge">DOC</span>IsolationForest 官方文档</a>
+          <a href="https://xgboost.readthedocs.io/en/stable/" target="_blank" rel="noopener"><span class="badge">DOC</span>XGBoost 官方文档</a>
+          <a href="https://arxiv.org/abs/1901.03407" target="_blank" rel="noopener"><span class="badge">DOC</span>综述 · Deep Learning for Anomaly Detection（arXiv）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p5i6">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">重构与序列类：Autoencoder、LSTM 时序异常检测</div>
+        <div class="item-desc">AE 用重构误差做异常分数，LSTM 用预测误差 —— 这两个是论文创新点的常见载体（改进网络结构、注意力、对比学习…）。</div>
+        <div class="res">
+          <a href="https://pytorch.org/tutorials/recipes/autoencoder.html" target="_blank" rel="noopener"><span class="badge">DOC</span>PyTorch Autoencoder 教程</a>
+          <a href="https://curiousily.com/posts/time-series-anomaly-detection-using-lstm-autoencoder-with-pytorch-in-python/" target="_blank" rel="noopener"><span class="badge">COURSE</span>LSTM-AE 时序异常检测完整实战（英文）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p5i7">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">在 NSL-KDD 上完成一次端到端基线：清洗 → 特征 → 3 个模型对比 → 出评估表</div>
+        <div class="item-desc">产出物：一个 Notebook + 一张指标对比表 + 一张 ROC 曲线图。这就是毕设论文实验章节的雏形。</div>
+        <div class="res">
+          <a href="https://www.unb.ca/cic/datasets/nsl.html" target="_blank" rel="noopener"><span class="badge">DATA</span>NSL-KDD 官方页面（UNB）</a>
+          <a href="https://www.kaggle.com/datasets/hassan06/nslkdd" target="_blank" rel="noopener"><span class="badge">DATA</span>Kaggle 镜像（含示例代码）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">5.3</span>论文质感加分项</h4>
+
+    <div class="item" data-id="p5i8">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">不平衡学习：SMOTE 过采样、类别权重、阈值移动</div>
+        <div class="item-desc">安全数据攻击样本常不足 1%，处理不平衡是最自然的"创新点"之一。</div>
+        <div class="res">
+          <a href="https://imbalanced-learn.org/stable/" target="_blank" rel="noopener"><span class="badge">DOC</span>imbalanced-learn 官方文档</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p5i9">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">可解释性：SHAP 解释模型为什么报警</div>
+        <div class="item-desc">给系统加一个"告警原因解释"面板（哪个特征贡献最大），论文和演示都立刻高级一档。</div>
+        <div class="res">
+          <a href="https://shap.readthedocs.io/en/latest/" target="_blank" rel="noopener"><span class="badge">DOC</span>SHAP 官方文档与示例</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PHASE 6 ============ -->
+<section class="block" id="p6">
+<div class="phase" style="--pc:#60a5fa">
+  <div class="phase-head">
+    <div class="phase-num">PHASE<br>06</div>
+    <div class="phase-title">
+      <h3>安全数据分析专项：数据集、日志平台与威胁建模</h3>
+      <p class="goal">目标：了解安全数据科学的真实生态 —— 主流公开数据集怎么选、ELK 日志平台怎么搭、ATT&amp;CK 知识库怎么用来组织检测逻辑。选题前先在这里"侦察"一周。</p>
+    </div>
+    <div class="phase-meta">
+      <div class="dur">建议周期 · 3 ~ 4 周</div>
+      <div class="pbar"><i></i></div>
+      <div class="ptxt">0 / 0</div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">6.1</span>主流公开数据集（选题之源）</h4>
+
+    <div class="item" data-id="p6i1">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">网络入侵方向：CIC-IDS2017 / CSE-CIC-IDS2018 / UNSW-NB15</div>
+        <div class="item-desc">CIC-IDS2017 是近年论文用得最多的入侵检测数据集：5 天流量、含暴力破解 / DoS / 渗透等多种攻击，且官方提供特征提取工具。</div>
+        <div class="res">
+          <a href="https://www.unb.ca/cic/datasets/ids-2017.html" target="_blank" rel="noopener"><span class="badge">DATA</span>CIC-IDS2017（UNB 官方）</a>
+          <a href="https://www.unb.ca/cic/datasets/ids-2018.html" target="_blank" rel="noopener"><span class="badge">DATA</span>CSE-CIC-IDS2018</a>
+          <a href="https://research.unsw.edu.au/projects/unsw-nb15-dataset" target="_blank" rel="noopener"><span class="badge">DATA</span>UNSW-NB15</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p6i2">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">日志与主机方向：Loghub（HDFS/BGL）、ADFA-LD、DARPA 系列</div>
+        <div class="item-desc">想做"日志异常检测"选题就从 Loghub 的 HDFS 入手，有标注、有现成解析工具，复现成本低。</div>
+        <div class="res">
+          <a href="https://github.com/logpai/loghub" target="_blank" rel="noopener"><span class="badge">DATA</span>Loghub 日志数据集集合</a>
+          <a href="https://www.unsw.adfa.edu.au/unsw-canberra-cyber/cybersecurity/ADFA-IDS-Datasets/" target="_blank" rel="noopener"><span class="badge">DATA</span>ADFA-IDS（主机调用序列）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p6i3">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">恶意域名 / 流量分类方向：DGA 家族样本、CTU-13、USTC-TFC</div>
+        <div class="item-desc">DGA 检测是"小数据 + 强结果"的友好选题：字符序列建模即可，训练快、故事完整。</div>
+        <div class="res">
+          <a href="https://data.netlab.360.com/dga/" target="_blank" rel="noopener"><span class="badge">DATA</span>360 Netlab · DGA 家族数据</a>
+          <a href="https://www.stratosphereips.org/datasets-ctu13" target="_blank" rel="noopener"><span class="badge">DATA</span>CTU-13 僵尸网络流量</a>
+          <a href="https://www.kaggle.com/datasets" target="_blank" rel="noopener"><span class="badge">DATA</span>Kaggle Datasets（搜 "malware / intrusion / DGA"）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">6.2</span>日志平台与威胁知识库</h4>
+
+    <div class="item" data-id="p6i4">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">ELK Stack：Filebeat 采集 → Logstash 解析 → Elasticsearch 存储 → Kibana 展示</div>
+        <div class="item-desc">搭一遍最小链路即可；Kibana 的发现与可视化思路，反过来会给你做自研大屏很多启发。</div>
+        <div class="res">
+          <a href="https://www.elastic.co/guide/en/elastic-stack/current/index.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Elastic Stack 官方指南</a>
+          <a href="https://www.bilibili.com/video/BV17a4y1x7zq/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>ELK 快速上手（B 站）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p6i5">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">MITRE ATT&amp;CK：用战术-技术矩阵组织检测点</div>
+        <div class="item-desc">把检测规则/模型映射到 ATT&amp;CK 技术编号（如 T1110 暴力破解），论文里就是"面向攻击技战术的检测覆盖度分析" —— 很加分的分析视角。</div>
+        <div class="res">
+          <a href="https://attack.mitre.org/" target="_blank" rel="noopener"><span class="badge">DOC</span>MITRE ATT&amp;CK 官方矩阵</a>
+          <a href="https://attack.mitre.org/datasources/" target="_blank" rel="noopener"><span class="badge">DOC</span>ATT&amp;CK Data Sources（技术 ↔ 数据源映射）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p6i6">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">读两本"安全数据科学"的书，建立领域全局观</div>
+        <div class="item-desc">重点看案例章节：恶意域名检测、欺诈检测、日志聚类 —— 很多都能直接迁移成毕设章节结构。</div>
+        <div class="res">
+          <a href="http://datadrivensecurity.info/" target="_blank" rel="noopener"><span class="badge">BOOK</span>Data-Driven Security（含配套 R/Python 代码）</a>
+          <a href="https://www.oreilly.com/library/view/machine-learning-and/9781491979891/" target="_blank" rel="noopener"><span class="badge">BOOK</span>Machine Learning &amp; Security（O'Reilly，中译《机器学习与安全》）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PHASE 7 ============ -->
+<section class="block" id="p7">
+<div class="phase" style="--pc:#fb923c">
+  <div class="phase-head">
+    <div class="phase-num">PHASE<br>07</div>
+    <div class="phase-title">
+      <h3>攻防博弈：对抗机器学习与红蓝对抗视角</h3>
+      <p class="goal">目标：理解"检测模型本身也会被攻击" —— 对抗样本如何绕过 ML 检测器、防御方如何加固，以及如何用博弈论语言描述攻防收益。这是论文从"系统"走向"研究"的跳板。</p>
+    </div>
+    <div class="phase-meta">
+      <div class="dur">建议周期 · 4 ~ 6 周（研究型选题重点投入）</div>
+      <div class="pbar"><i></i></div>
+      <div class="ptxt">0 / 0</div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">7.1</span>对抗机器学习（Adversarial ML）</h4>
+
+    <div class="item" data-id="p7i1">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">对抗样本原理：FGSM / PGD / C&amp;W 攻击与扰动的直觉</div>
+        <div class="item-desc">先在 MNIST 上复现 FGSM（30 行代码），理解"梯度方向加噪就能骗过模型"，再迁移到流量特征空间思考约束。</div>
+        <div class="res">
+          <a href="https://pytorch.org/tutorials/beginner/fgsm_tutorial.html" target="_blank" rel="noopener"><span class="badge">DOC</span>PyTorch 官方 FGSM 教程</a>
+          <a href="https://arxiv.org/abs/1412.6572" target="_blank" rel="noopener"><span class="badge">DOC</span>Goodfellow 经典论文（arXiv）</a>
+          <a href="https://adversarial-ml-tutorial.org/" target="_blank" rel="noopener"><span class="badge">COURSE</span>Adversarial ML Tutorial（CMU）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p7i2">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">对抗攻击工具库：IBM ART / Foolbox / CleverHans 上手一个</div>
+        <div class="item-desc">推荐 IBM ART：文档全、同时覆盖攻击与防御（对抗训练、特征压缩、集成防御），正好支撑"攻防闭环"实验设计。</div>
+        <div class="res">
+          <a href="https://github.com/Trusted-AI/adversarial-robustness-toolbox" target="_blank" rel="noopener"><span class="badge">TOOL</span>IBM Adversarial Robustness Toolbox</a>
+          <a href="https://github.com/bethgelab/foolbox" target="_blank" rel="noopener"><span class="badge">TOOL</span>Foolbox</a>
+          <a href="https://github.com/cleverhans-lab/cleverhans" target="_blank" rel="noopener"><span class="badge">TOOL</span>CleverHans</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p7i3">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">面向安全检测器的对抗攻击：流量/恶意软件特征的"可行性约束"扰动</div>
+        <div class="item-desc">关键认知：图像里随便加噪，流量里不行 —— 改"包长"会影响"流时长"。搜索 "adversarial attacks network intrusion detection" 读 2~3 篇近两年论文。</div>
+        <div class="res">
+          <a href="https://arxiv.org/search/?query=adversarial+network+intrusion+detection&searchtype=all" target="_blank" rel="noopener"><span class="badge">DOC</span>arXiv · 对抗攻击 NIDS 检索</a>
+          <a href="https://scholar.google.com/scholar?q=adversarial+attacks+intrusion+detection+survey" target="_blank" rel="noopener"><span class="badge">DOC</span>Google Scholar · 相关综述</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">7.2</span>博弈论与红蓝对抗</h4>
+
+    <div class="item" data-id="p7i4">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">博弈论基础：纳什均衡、零和博弈、Stackelberg 博弈</div>
+        <div class="item-desc">毕设不需要会推公式，但要能把攻防建模成"防御者先部署、攻击者最优响应"的 Stackelberg 框架 —— 引言和创新点都能用。</div>
+        <div class="res">
+          <a href="https://oyc.yale.edu/economics/econ-159" target="_blank" rel="noopener"><span class="badge">COURSE</span>耶鲁公开课 · 博弈论（Ben Polak）</a>
+          <a href="https://www.bilibili.com/video/BV1Kt411h7Ep/" target="_blank" rel="noopener"><span class="badge">VIDEO</span>博弈论入门（B 站）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p7i5">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">红蓝对抗与威胁建模：Kill Chain、ATT&amp;CK、常见防御绕过手法（WAF/IDS 混淆）</div>
+        <div class="item-desc">了解 Payload 编码混淆、分片、慢速扫描等"绕过"思路 —— 它们直接定义了你的检测系统要扛的"对抗强度"。</div>
+        <div class="res">
+          <a href="https://owasp.org/www-community/attacks/" target="_blank" rel="noopener"><span class="badge">DOC</span>OWASP 攻击手法列表</a>
+          <a href="https://github.com/foospidy/payloads" target="_blank" rel="noopener"><span class="badge">DATA</span>PayloadsAllTheThings 姊妹项目 · payload 语料</a>
+          <a href="https://github.com/swisskyrepo/PayloadsAllTheThings" target="_blank" rel="noopener"><span class="badge">DOC</span>PayloadsAllTheThings（红队手册）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p7i6">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">最小攻防闭环实验：训练 IDS 分类器 → 生成对抗样本绕过 → 对抗训练加固 → 再评估</div>
+        <div class="item-desc">一轮"攻-防-再评估"的闭环数据，就是一篇研究型毕设论文的主干图表。用表格特征 + MLP 即可，不必上复杂模型。</div>
+        <div class="res">
+          <a href="https://github.com/Trusted-AI/adversarial-robustness-toolbox/wiki" target="_blank" rel="noopener"><span class="badge">DOC</span>ART Wiki · 攻防实验示例</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PHASE 8 ============ -->
+<section class="block" id="p8">
+<div class="phase" style="--pc:#34d399">
+  <div class="phase-head">
+    <div class="phase-num">PHASE<br>08</div>
+    <div class="phase-title">
+      <h3>工程实践：模块开发、部署与写作</h3>
+      <p class="goal">目标：把算法变成可演示的系统、把实验变成可复现的仓库、把过程变成可答辩的论文。工程的体面程度，常常比模型精度更能决定答辩印象。</p>
+    </div>
+    <div class="phase-meta">
+      <div class="dur">贯穿全程 · 毕设期集中 4 周</div>
+      <div class="pbar"><i></i></div>
+      <div class="ptxt">0 / 0</div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">8.1</span>模块化与部署</h4>
+
+    <div class="item" data-id="p8i1">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">项目结构：数据层 / 特征层 / 模型层 / 服务层 / 展示层分离</div>
+        <div class="item-desc">约定：数据处理脚本、训练脚本、推理服务、前端各居其位；配置走 .env 与 config.yaml。答辩演示出问题时，清晰的结构能救场。</div>
+        <div class="res">
+          <a href="https://fastapi.tiangolo.com/zh/tutorial/bigger-applications/" target="_blank" rel="noopener"><span class="badge">DOC</span>FastAPI · 大型应用结构</a>
+          <a href="https://12factor.net/zh_cn/" target="_blank" rel="noopener"><span class="badge">DOC</span>十二要素应用方法论（中文）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p8i2">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">Docker：为后端和数据库写 Dockerfile / docker-compose</div>
+        <div class="item-desc">答辩现场一条 docker compose up 起全套环境，比任何口头解释都有说服力。</div>
+        <div class="res">
+          <a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener"><span class="badge">DOC</span>Docker 官方入门</a>
+          <a href="https://yeasy.gitbook.io/docker_practice/" target="_blank" rel="noopener"><span class="badge">BOOK</span>Docker — 从入门到实践（中文开源书）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p8i3">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">测试与质量：pytest 单测 + 一个最小 CI（GitHub Actions）</div>
+        <div class="item-desc">哪怕只有 5 个测试（数据解析、API 返回、模型推理形状），也足以在论文"系统测试"章节写出真实的一节。</div>
+        <div class="res">
+          <a href="https://docs.pytest.org/en/stable/getting-started.html" target="_blank" rel="noopener"><span class="badge">DOC</span>pytest 官方入门</a>
+          <a href="https://docs.github.com/zh/actions" target="_blank" rel="noopener"><span class="badge">DOC</span>GitHub Actions 文档</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <h4><span class="mno">8.2</span>论文与表达</h4>
+
+    <div class="item" data-id="p8i4">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">文献检索与管理：Google Scholar / 知网 / arXiv + Zotero</div>
+        <div class="item-desc">调研节奏：先读 1 篇近三年综述定地图，再精读 5~8 篇强相关，引用规范从第一天就用 Zotero 管起来。</div>
+        <div class="res">
+          <a href="https://scholar.google.com/" target="_blank" rel="noopener"><span class="badge">TOOL</span>Google Scholar</a>
+          <a href="https://arxiv.org/" target="_blank" rel="noopener"><span class="badge">TOOL</span>arXiv（cs.CR 密码学与安全 / cs.LG 机器学习）</a>
+          <a href="https://www.zotero.org/" target="_blank" rel="noopener"><span class="badge">TOOL</span>Zotero 文献管理（免费）</a>
+          <a href="https://www.connectedpapers.com/" target="_blank" rel="noopener"><span class="badge">TOOL</span>Connected Papers（按引用关系找论文）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="item" data-id="p8i5">
+      <label class="ck"><input type="checkbox"></label>
+      <div class="item-body">
+        <div class="item-title">论文写作与作图规范：实验图统一风格、表格三线表、章节模板</div>
+        <div class="item-desc">Matplotlib 出图统一字号/配色/图例位置；系统架构图用 draw.io；答辩 PPT 遵循"问题 → 方法 → 实验 → 系统 → 总结"五段式。</div>
+        <div class="res">
+          <a href="https://app.diagrams.net/" target="_blank" rel="noopener"><span class="badge">TOOL</span>draw.io 架构图（免费）</a>
+          <a href="https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html" target="_blank" rel="noopener"><span class="badge">DOC</span>Matplotlib 样式表参考</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PROPOSALS ============ -->
+<section class="block" id="proposals">
+  <div class="sec-head">
+    <div class="tag">GRADUATION DESIGN PROPOSALS</div>
+    <h2>四个可直接落地的毕设选题建议</h2>
+    <p>难度由低到高排列。前两个偏"系统 + 应用"，工作量稳、演示效果好；后两个偏"研究 + 创新"，论文上限高。所有选题都默认含一个可演示的 Web 系统 —— 这正是前面阶段二、三、五、六的合流之处。</p>
+  </div>
+
+  <div class="prop-grid">
+    <div class="prop">
+      <div class="prop-top">
+        <h3>选题一 · 基于机器学习的网络入侵检测系统（NIDS）</h3>
+        <span class="stars">★★★</span>
+      </div>
+      <span class="pick">推荐 · 稳妥均衡</span>
+      <div class="field"><b>数据集</b>CIC-IDS2017（主）/ NSL-KDD（对比复现）</div>
+      <div class="field"><b>技术栈</b>Pandas + scikit-learn / PyTorch · FastAPI · Vue3 + ECharts 大屏</div>
+      <div class="field"><b>核心内容</b>
+        <ul>
+          <li>流量特征工程复现（CICFlowMeter 80 维特征）</li>
+          <li>基线模型（RF / XGBoost）与深度模型（MLP / LSTM）对比实验</li>
+          <li>类别不平衡处理（SMOTE / 类别权重）消融实验</li>
+          <li>在线检测服务：上传流量 CSV → 返回告警与置信度</li>
+          <li>态势感知大屏：攻击类型分布、来源 IP TopN、时序曲线</li>
+        </ul>
+      </div>
+      <div class="inno"><b>可选创新点：</b>不平衡学习改进、SHAP 告警可解释面板、特征选择降维后的轻量化部署对比。</div>
+      <div class="risk"><b>风险提示：</b>数据集大（全量约 50GB pcap），建议先用官方 CSV 特征子集；对比实验要控制变量，别堆模型数量。</div>
+    </div>
+
+    <div class="prop">
+      <div class="prop-top">
+        <h3>选题二 · 基于日志的异常行为检测与攻击溯源分析平台</h3>
+        <span class="stars">★★★☆</span>
+      </div>
+      <div class="field"><b>数据集</b>Loghub HDFS / Linux auth.log（自建靶场产生）/ nginx access log</div>
+      <div class="field"><b>技术栈</b>ELK（采集）· Drain 日志模板解析 · Isolation Forest / 序列模型 · FastAPI + Vue3</div>
+      <div class="field"><b>核心内容</b>
+        <ul>
+          <li>自建 DVWA 靶场并真实攻击，采集一手攻击日志</li>
+          <li>日志模板解析（Drain）把非结构化日志事件化</li>
+          <li>无监督异常检测（IF / LOF / DeepLog 思路二选一）</li>
+          <li>告警 → ATT&amp;CK 技术映射，生成"攻击链时间线"视图</li>
+          <li>规则引擎 + ML 双通道检测的互补性分析</li>
+        </ul>
+      </div>
+      <div class="inno"><b>可选创新点：</b>"自己攻击自己检测"的数据闭环是天然的故事线；ATT&amp;CK 覆盖度分析可作单独一章。</div>
+      <div class="risk"><b>风险提示：</b>日志解析细节繁琐，预留充足时间；DeepLog 复现成本高于预期，先保 Isolation Forest 基线。</div>
+    </div>
+
+    <div class="prop">
+      <div class="prop-top">
+        <h3>选题三 · 面向入侵检测模型的对抗样本攻防博弈实验平台</h3>
+        <span class="stars">★★★★</span>
+      </div>
+      <span class="pick">研究型 · 论文上限高</span>
+      <div class="field"><b>数据集</b>CIC-IDS2017 特征 CSV（表格特征即可）</div>
+      <div class="field"><b>技术栈</b>PyTorch · IBM ART · 博弈论建模 · 可视化平台（可选简化版）</div>
+      <div class="field"><b>核心内容</b>
+        <ul>
+          <li>训练流量二分类器（MLP）作为"受害者模型"</li>
+          <li>实现带可行性约束的对抗扰动（只改可被攻击者操纵的特征）</li>
+          <li>评估攻击成功率与扰动代价的权衡曲线</li>
+          <li>对抗训练 / 特征压缩 / 集成检测三种防御对比</li>
+          <li>用 Stackelberg 博弈框架讨论攻防收益矩阵</li>
+        </ul>
+      </div>
+      <div class="inno"><b>可选创新点：</b>"约束条件设计"和"攻防闭环评估"本身就是贡献点；可发表/投递小论文。</div>
+      <div class="risk"><b>风险提示：</b>需要扎实的 PyTorch 与论文阅读能力；Web 平台可做精简版，把精力留给实验。</div>
+    </div>
+
+    <div class="prop">
+      <div class="prop-top">
+        <h3>选题四 · 基于深度学习的恶意域名（DGA）检测与家族分类</h3>
+        <span class="stars">★★★</span>
+      </div>
+      <div class="field"><b>数据集</b>Alexa/Tranco 白名单 + 360 Netlab DGA 家族样本</div>
+      <div class="field"><b>技术栈</b>字符级 CNN / LSTM / 小型 Transformer · FastAPI · 大屏展示</div>
+      <div class="field"><b>核心内容</b>
+        <ul>
+          <li>字符级建模：域名 → 序列 → 二分类（DGA / 正常）</li>
+          <li>多分类：DGA 家族识别与小样本家族问题</li>
+          <li>CNN / LSTM / Transformer 三架构公平对比</li>
+          <li>在线检测 API + 域名家族画像页面</li>
+          <li>对抗视角：人工构造"拟人化"域名评估绕过率</li>
+        </ul>
+      </div>
+      <div class="inno"><b>可选创新点：</b>训练快、数据轻，适合把"对抗绕过 + 防御"做成一章，兼顾选题三的思想但成本更低。</div>
+      <div class="risk"><b>风险提示：</b>故事完整度依赖对比与消融实验的设计，避免只报一个准确率就收尾。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="block" id="timeline">
+  <div class="sec-head">
+    <div class="tag">16-WEEK PLAN</div>
+    <h2>毕设执行时间规划（16 周示例）</h2>
+    <p>假设已完成阶段一~四的基础学习。原则：实验先行、系统殿后、写作贯穿 —— 永远不要让"系统还没做完"阻塞论文核心章节。</p>
+  </div>
+
+  <div class="tl">
+    <div class="tl-stage">
+      <div class="wk">W1 – W2</div>
+      <h4>调研与开题</h4>
+      <ul>
+        <li>读 1 篇综述 + 5 篇强相关论文</li>
+        <li>定题并写开题报告</li>
+        <li>搭好仓库 / 环境 / 数据快照</li>
+      </ul>
+    </div>
+    <div class="tl-stage">
+      <div class="wk">W3 – W6</div>
+      <h4>数据与基线</h4>
+      <ul>
+        <li>数据清洗与特征工程 pipeline</li>
+        <li>2~3 个基线模型跑通</li>
+        <li>固定评估协议与指标表</li>
+      </ul>
+    </div>
+    <div class="tl-stage">
+      <div class="wk">W7 – W10</div>
+      <h4>改进与实验</h4>
+      <ul>
+        <li>核心改进点实现</li>
+        <li>对比 / 消融 / 鲁棒性实验</li>
+        <li>论文实验章节初稿</li>
+      </ul>
+    </div>
+    <div class="tl-stage">
+      <div class="wk">W11 – W14</div>
+      <h4>系统开发</h4>
+      <ul>
+        <li>FastAPI 推理服务 + 数据库</li>
+        <li>Vue3 前端与态势大屏</li>
+        <li>Docker 打包与演示脚本</li>
+      </ul>
+    </div>
+    <div class="tl-stage">
+      <div class="wk">W15 – W16</div>
+      <h4>论文与答辩</h4>
+      <ul>
+        <li>全文整合、查重与格式</li>
+        <li>答辩 PPT 五段式打磨</li>
+        <li>演示彩排（含断网备案）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIPS ============ -->
+<section class="block">
+  <div class="sec-head">
+    <div class="tag">PRACTICAL ADVICE</div>
+    <h2>给安全方向毕设的五条实战建议</h2>
+  </div>
+  <div class="tips">
+    <div class="tip">
+      <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5.5V11c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5.5L12 2z" stroke="#34d399" stroke-width="1.7" stroke-linejoin="round"/></svg>系统完成度 &gt; 模型新高度</h4>
+      <p>评委 80% 的印象来自可运行的演示。一个能现场上传数据、实时出告警、有大屏的系统，胜过纸面上高 0.5% 的 F1。先保底线，再冲上限。</p>
+    </div>
+    <div class="tip">
+      <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#22d3ee" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="#22d3ee" stroke-width="1.7" stroke-linecap="round"/></svg>实验设计先行</h4>
+      <p>开题后就固定：数据集版本、划分方式、指标、对比方法。中途改评估协议是大忌 —— 之前所有实验数字都会作废。</p>
+    </div>
+    <div class="tip">
+      <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="#a78bfa" stroke-width="1.7"/><path d="M3 9h18M8 4v5" stroke="#a78bfa" stroke-width="1.7"/></svg>自建靶场 = 一手数据</h4>
+      <p>DVWA + Burp 打一轮并采集日志，你就拥有了"真实攻击 + 真实标注"的数据闭环。论文里写"自建实验环境采集数据"，可信度和故事性立刻不同。</p>
+    </div>
+    <div class="tip">
+      <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7" stroke="#fbbf24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>警惕只报 Accuracy</h4>
+      <p>攻击样本占 1% 的数据集上，"全部判正常"也有 99% 准确率。报告 Precision / Recall / F1 / PR-AUC，并在不平衡设置下讨论 —— 这是评委最爱挖的坑。</p>
+    </div>
+    <div class="tip">
+      <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3a5 5 0 015 5c0 2-1 3.4-2 4.5-.7.8-1 1.5-1 2.5h-4c0-1-.3-1.7-1-2.5C8 11.4 7 10 7 8a5 5 0 015-5z" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.5 18h5M10.5 21h3" stroke="#fb7185" stroke-width="1.7" stroke-linecap="round"/></svg>每周留档，答辩不慌</h4>
+      <p>每周往仓库提交一次（代码、图表、实验记录）。它们最终会变成：论文图表、答辩素材、工作证明 —— 以及被问"这个结果是哪来的"时的底气。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>安全数据智能 · 毕业设计学习作战地图 <span class="mono">v1.0</span></div>
+  <div style="margin-top:6px">外部资源链接均指向官方文档与公开平台，若个别视频失效，按标题关键词在对应平台重新检索即可。</div>
+  <button class="reset-btn" id="resetBtn">清空全部勾选进度</button>
+</footer>
+
+<script>
+(function(){
+  const KEY='secRoadmapProgress.v1';
+  const boxes=[...document.querySelectorAll('.item .ck input')];
+  const items=[...document.querySelectorAll('.item')];
+  const total=boxes.length;
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+
+  // restore
+  items.forEach(it=>{
+    const id=it.dataset.id;
+    const box=it.querySelector('input');
+    if(state[id]){box.checked=true;it.classList.add('done')}
+    box.addEventListener('change',()=>{
+      state[id]=box.checked?1:0;
+      if(!box.checked)delete state[id];
+      localStorage.setItem(KEY,JSON.stringify(state));
+      it.classList.toggle('done',box.checked);
+      refresh();
+    });
+  });
+
+  document.getElementById('totalCount').textContent=total;
+
+  function refresh(){
+    const done=boxes.filter(b=>b.checked).length;
+    const pct=total?Math.round(done/total*100):0;
+    // hero
+    document.getElementById('doneCount').firstChild.textContent=done;
+    document.getElementById('donutPct').textContent=pct+'%';
+    document.getElementById('donut').style.setProperty('--p',pct);
+    // nav
+    document.getElementById('navBarFill').style.width=pct+'%';
+    document.getElementById('navPct').textContent=pct+'%';
+    // per-phase
+    document.querySelectorAll('.phase').forEach(ph=>{
+      const bs=[...ph.querySelectorAll('.item input')];
+      const d=bs.filter(b=>b.checked).length;
+      const p=bs.length?Math.round(d/bs.length*100):0;
+      ph.querySelector('.pbar i').style.width=p+'%';
+      ph.querySelector('.ptxt').textContent=d+' / '+bs.length+' · '+p+'%';
+    });
+  }
+  refresh();
+
+  // reset
+  document.getElementById('resetBtn').addEventListener('click',()=>{
+    if(!confirm('确定清空所有勾选进度？'))return;
+    localStorage.removeItem(KEY);
+    boxes.forEach(b=>b.checked=false);
+    items.forEach(it=>it.classList.remove('done'));
+    refresh();
+  });
+
+  // filter chips
+  const chips=[...document.querySelectorAll('.chip')];
+  chips.forEach(c=>c.addEventListener('click',()=>{
+    chips.forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+    const f=c.dataset.filter;
+    document.querySelectorAll('.res a').forEach(a=>{
+      a.classList.toggle('dim',f!=='all'&&a.dataset.type!==f);
+    });
+  }));
+
+  // scroll spy
+  const links=[...document.querySelectorAll('#navlinks a')];
+  const map={};
+  links.forEach(a=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)map[id]=a});
+  const spy=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const a=map[en.target.id];
+        if(a){a.classList.add('active');a.scrollIntoView({block:'nearest',inline:'center'})}
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  Object.keys(map).forEach(id=>spy.observe(document.getElementById(id)));
+})();
+</script>
+</body>
+</html>
